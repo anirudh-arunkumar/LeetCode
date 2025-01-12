@@ -1,23 +1,17 @@
-nums = [1, 2, 3, 4]
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        
+        output = [0] * len(nums)
+        running_product = 1
 
-def ProductofArrayExceptSelf(nums):
+        for i in range(len(nums)):
+            output[i] = running_product
+            running_product *= nums[i]
 
-    result = [1] * (len(nums))
-    prefix = 1
+        post_product = 1
 
-    for i in range(len(nums)):
-        result[i] = prefix
-        prefix *= nums[i]
-    print(result)
-    postfix = 1
-
-    for i in range(len(nums) - 1, -1, -1):
-        result[i] *= postfix
-        postfix *= nums[i]
-    return result
-
-
-
-
-if __name__ == "__main__":
-    print(ProductofArrayExceptSelf(nums))
+        for i in range(len(nums) - 1, -1, -1):
+            output[i] *= post_product
+            post_product *= nums[i]
+        
+        return output
